@@ -31,6 +31,9 @@ android {
         jvmTarget = '1.8'
     }
     android.buildFeatures.dataBinding = true
+    buildTypes.each {
+        it.buildConfigField 'String', 'MAP_KEY', MAP_KEY
+    }
 }
 
 dependencies {
