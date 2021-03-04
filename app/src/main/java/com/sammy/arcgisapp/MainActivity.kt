@@ -140,29 +140,29 @@ class MainActivity : AppCompatActivity() {
     private fun startNavigation(routeTask: RouteTask, routeParameters: RouteParameters, routeResult: RouteResult) {
 
         // clear any graphics from the current graphics overlay
-        mMapView!!.graphicsOverlays[0].graphics.clear()
+        mMapView.graphicsOverlays[0].graphics.clear()
 
         // get the route's geometry from the route result
         val routeGeometry = routeResult.routes[0].routeGeometry
         // create a graphic (with a dashed line symbol) to represent the route
         mRouteAheadGraphic = Graphic(routeGeometry,
                 SimpleLineSymbol(SimpleLineSymbol.Style.DASH, Color.MAGENTA, 5f))
-        mMapView!!.graphicsOverlays[0].graphics.add(mRouteAheadGraphic)
+        mMapView.graphicsOverlays[0].graphics.add(mRouteAheadGraphic)
         // create a graphic (solid) to represent the route that's been traveled (initially empty)
         mRouteTraveledGraphic = Graphic(routeGeometry,
                 SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, Color.BLUE, 5f))
-        mMapView!!.graphicsOverlays[0].graphics.add(mRouteTraveledGraphic)
+        mMapView.graphicsOverlays[0].graphics.add(mRouteTraveledGraphic)
 
         // get the map view's location display
-        val locationDisplay = mMapView!!.locationDisplay
+        val locationDisplay = mMapView.locationDisplay
         // set up a simulated location data source which simulates movement along the route
         mSimulatedLocationDataSource = SimulatedLocationDataSource()
         val simulationParameters = SimulationParameters(Calendar.getInstance(), 35.0, 5.0, 5.0)
-        mSimulatedLocationDataSource!!.setLocations(routeGeometry, simulationParameters)
+        mSimulatedLocationDataSource.setLocations(routeGeometry, simulationParameters)
 
         // set up a RouteTracker for navigation along the calculated route
         mRouteTracker = RouteTracker(applicationContext, routeResult, 0, true)
-        mRouteTracker!!.enableReroutingAsync(routeTask, routeParameters,
+        mRouteTracker.enableReroutingAsync(routeTask, routeParameters,
                 RouteTracker.ReroutingStrategy.TO_NEXT_WAYPOINT, true)
 
         // create a route tracker location data source to snap the location display to the route
@@ -188,9 +188,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             // get the route's tracking status
-            val trackingStatus = mRouteTracker!!.trackingStatus
+            val trackingStatus = mRouteTracker.trackingStatus
             // set geometries for the route ahead and the remaining route
-            mRouteAheadGraphic!!.geometry = trackingStatus.routeProgress.remainingGeometry
+            mRouteAheadGraphic.geometry = trackingStatus.routeProgress.remainingGeometry
             mRouteTraveledGraphic!!.geometry = trackingStatus.routeProgress.traversedGeometry
 
             // get remaining distance information
