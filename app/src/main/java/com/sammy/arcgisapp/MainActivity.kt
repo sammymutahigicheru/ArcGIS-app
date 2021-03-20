@@ -61,8 +61,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var locationDisplay: LocationDisplay
-    private var latitude: Double = 0.0
-    private var longitude: Double = 0.0
+    private var latitude: Double = -1.31754
+    private var longitude: Double = 36.84411
     private lateinit var currentLocation: Location
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,10 +71,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         //    setSupportActionBar(binding.navigationToolbar)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        latitude = intent?.getDoubleExtra("lat", 0.0)!!
-        longitude = intent?.getDoubleExtra("lon", 0.0)!!
-        Timber.e("Latitude: $latitude")
-        Timber.e("Latitude: $longitude")
 
         if (isLocationPermissionEnabled) {
             getCurrentLocation()
